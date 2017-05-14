@@ -1,2 +1,2 @@
-# timesheet
-Timesheet app using Django, DayPilot Pro (Trial) and Datatables Edit Add topics
+# Timesheet
+Timesheet webapp using Django, DayPilot Pro (Trial) and Datatables. Implemente chiefly as a learning exercise.
