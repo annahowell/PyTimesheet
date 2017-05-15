@@ -1,10 +1,340 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="mt-30" id="scheduler-id"></div>
+
+
+<p style="font-size:13px">
+    You can add items by clicking an empty box, and you can drag over multiple horiztonal boxes to create longer events.
+    <br><br>
+    Clicking on an existing work box lets you edit it, you can drag the bits to the left and right of it to resize it.
+    <br><br>
+    You can move work boxes around so long as they don't overlap each other.
+    <br><br>
+    Changing the project the work box belongs to changes its colour strip so it's easier to read what's what.
+</p>
+
+<script type="text/javascript">/*
+    YUI().use(
+        'aui-scheduler',
+        function(Y) {
+            var events = [
+                {
+                    content: 'Partial Lunar Eclipse',
+                    endDate: new Date(2013, 3, 25, 5),
+                    startDate: new Date(2013, 3, 25, 1)
+                },
+                {
+                    color: "#8d8",
+//borderColor: '#F00',
+                    meeting: true,
+                    content: 'Earth Day Lunch',
+                    disabled: false,
+                    endDate: new Date(2013, 3, 22, 14, 30),
+                    reminder: true,
+                    startDate: new Date(2013, 3, 22, 10)
+                },
+                {
+                    content: "Weeklong",
+                    endDate: new Date(2013, 3, 27),
+                    startDate: new Date(2013, 3, 21)
+                }
+            ];
+
+            var dayView = new Y.SchedulerDayView();
+            var weekView = new Y.SchedulerWeekView();
+            var monthView = new Y.SchedulerMonthView();
+
+            var eventRecorder = new Y.SchedulerEventRecorder({
+                on: {
+                    save: function(event) {
+//alert('Save Event:' + this.isNew() + ' --- ' + this.getContentNode().val() + this.getFormattedDate());
+                        console.log(this.toJSON());
+                    },
+                    edit: function(event) {
+                        alert('Edit Event:' + this.isNew() + ' --- ' + this.getContentNode().val() + this.getStartNode().val());
+                    },
+                    delete: function(event) {
+                        alert('Delete Event:' + this.isNew() + ' --- ' + this.getContentNode().val());
+                    }
+                }
+
+
+
+            });
+
+
+
+
+            new Y.Scheduler(
+                {
+                    activeView: weekView,
+                    boundingBox: '#scheduler-id',
+                    date: new Date(2013, 3, 25),
+                    eventRecorder: eventRecorder,
+                    items: events,
+                    render: true,
+                    views: [dayView, weekView, monthView]
+                }
+            );
+                console.log(Y);
+
+        }
+
+    );*/
+
+            YUI().use(
+              'aui-scheduler',
+              function(Y) {
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COL = Y.getClassName('scheduler-view', 'day', 'table', 'col');
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM = Y.getClassName('scheduler-view', 'day', 'table', 'col', 'shim');
+                var CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY = Y.getClassName('scheduler-view', 'day', 'table', 'colday');
+                var TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY = '<td class="' + [CSS_SCHEDULER_VIEW_DAY_TABLE_COL,
+                    CSS_SCHEDULER_VIEW_DAY_TABLE_COLDAY].join(' ') + '" data-colnumber="{colNumber}">' +
+                    '<div class="' + CSS_SCHEDULER_VIEW_DAY_TABLE_COL_SHIM + '">&nbsp;</div>' +
+                    '</td>';
+                var CSS_SCHEDULER_VIEW_DAY_HEADER_DAY = Y.getClassName('scheduler-view', 'day', 'header', 'day');
+                var CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = Y.getClassName('scheduler-view', 'day', 'header', 'day', 'first');
+                var TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST = '<td class="' + [CSS_SCHEDULER_VIEW_DAY_HEADER_DAY,
+                    CSS_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST].join(' ') + '"></td>';
+                var TPL_SCHEDULER_VIEW_DAY_HEADER_DAY = '<th class="' + CSS_SCHEDULER_VIEW_DAY_HEADER_DAY +
+                    '" data-colnumber="{colNumber}"><a href="#">&nbsp;</a></th>';
+                var SchedulerResourceView = Y.Component.create({
+                    NAME: 'scheduler-view-resource',
+                    EXTENDS: Y.SchedulerDayView,
+                    ATTRS: {
+                        name: {
+                            value: 'resources'
+                        },
+                        resources: {
+                            value: ['no resource']
+                        }
+                    },
+                    prototype: {
+                        getColumnShimByResource: function(resource) {
+                            var resources = this.get('resources');
+                            var index = resources.indexOf(resource);
+                            if (0 <= index && index < this.columnShims.size()) {
+                                return this.columnShims.item(index);
+                            }
+                            else {
+                                return null;
+                            }
+                        },
+                        plotEvent: function(evt) {
+                            var nodeList = evt.get('node');
+                            if (nodeList.size() < 2) {
+                                evt.addPaddingNode();
+                            }
+                            var node = evt.get('node').item(0);
+                            var paddingNode = evt.get('node').item(1);
+                            var shim = this.getColumnShimByResource(evt.get('resource'));
+                            if (shim) {
+                                shim.append(node);
+                                if (evt.get('visible')) {
+                                    node.show();
+                                }
+                            }
+                            else {
+                                node.hide();
+                            }
+                            evt.syncUI();
+                            this.syncEventTopUI(evt);
+                            this.syncEventHeightUI(evt);
+                        },
+                        plotEvents: function() {
+                            var scheduler = this.get('scheduler');
+                            var filterFn = this.get('filterFn');
+                            var events = scheduler.getEventsByDay(scheduler.get('date'), true);
+                            var resources = this.get('resources');
+                            scheduler.flushEvents();
+                            var view = this;
+                            this.columnShims.each(function(colShimNode, i) {
+                                var plottedEvents = [];
+                                var columnEvents = Y.Array.filter(
+                                    events,
+                                    function(event) {
+                                        return event.get('resource') === resources[i];
+                                    }
+                                );
+                                colShimNode.empty();
+                                Y.Array.each(columnEvents, function(evt) {
+                                    if (filterFn.apply(view, [evt])) {
+                                        view.plotEvent(evt);
+                                        plottedEvents.push(evt);
+                                    }
+                                });
+                                view.syncEventsIntersectionUI(plottedEvents);
+                            });
+                            this.syncHeaderViewUI();
+                            this.syncCurrentTimeUI();
+                        },
+                        syncDaysHeaderUI: function() {
+                            var resources = this.get('resources');
+                            this.colHeaderDaysNode.all('a').each(
+                                function(columnNode, i) {
+                                    columnNode.html(resources[i]);
+                                }
+                            );
+                        },
+                        syncUI: function() {
+                            SchedulerResourceView.superclass.syncUI.apply(this, arguments);
+                            this.gridContainer.attr('colspan', this.get('resources').length);
+                        },
+                        _valueColDaysNode: function() {
+                            var buffer = [];
+                            var colNumber = 0;
+                            for (var r in this.get('resources')) {
+                                buffer.push(
+                                    Y.Lang.sub(TPL_SCHEDULER_VIEW_DAY_TABLE_COLDAY, {
+                                        colNumber: colNumber++
+                                    })
+                                );
+                            }
+                            return Y.NodeList.create(buffer.join(''));
+                        },
+                        _valueColHeaderDaysNode: function() {
+                            var buffer = [];
+                            var colNumber = 0;
+                            buffer.push(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY_FIRST);
+                            for (var r in this.get('resources')) {
+                                buffer.push(
+                                    Y.Lang.sub(TPL_SCHEDULER_VIEW_DAY_HEADER_DAY, {
+                                        colNumber: colNumber++
+                                    })
+                                );
+                            }
+                            return Y.NodeList.create(buffer.join(''));
+                        }
+                    }
+                });
+                var date = new Date(2014, 11, 1);
+                var eventRecorder = new Y.SchedulerEventRecorder();
+                var resourceView = new SchedulerResourceView(
+                    {
+                        resources: ['John', 'Mary', 'Alfred']
+                    }
+                );
+                new Y.Scheduler(
+                  {
+                    boundingBox: '#scheduler-id',
+                    date: date,
+                    eventRecorder: eventRecorder,
+                    items: [
+                        {
+                            resource: 'John',
+                            color: 'f0f',
+                            content: 'Meeting',
+                            startDate: new Date(2014, 11, 1, 11),
+                            endDate: new Date(2014, 11, 1, 13)
+                        },
+                        {
+                            resource: 'John',
+                            color: 'f0f',
+                            content: 'Lunch',
+                            startDate: new Date(2014, 11, 1, 12, 30),
+                            endDate: new Date(2014, 11, 1, 14)
+                        },
+                        {
+                            resource: 'Mary',
+                            color: '0af',
+                            content: 'Workshop',
+                            startDate: new Date(2014, 11, 1, 16),
+                            endDate: new Date(2014, 11, 1, 17)
+                        },
+                        {
+                            resource: 'Alfred',
+                            color: 'aa7',
+                            content: 'Birthday party',
+                            startDate: new Date(2014, 11, 1, 16, 30),
+                            endDate: new Date(2014, 11, 1, 19)
+                        }
+                    ],
+                    render: true,
+                    views: [resourceView]
+                  }
+                );
+              }
+            );
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    /*
+     YUI().use('aui-scheduler', function(Y) {
+     var items = [{
+     content: 'Wake Early'
+     }, {
+     content: 'Exercise'
+     }, ];
+     var schedulerViews = [
+     new Y.SchedulerWeekView(),
+     new Y.SchedulerDayView(),
+     new Y.SchedulerMonthView(),
+     new Y.SchedulerAgendaView()
+     ];
+     var eventRecorder = new Y.SchedulerEventRecorder({
+     on: {
+     save: function(event) {
+     alert('Save Event:' + this.isNew() + ' --- ' + this.getContentNode().val());
+     },
+     edit: function(event) {
+     alert('Edit Event:' + this.isNew() + ' --- ' + this.getContentNode().val());
+     },
+     delete: function(event) {
+     alert('Delete Event:' + this.isNew() + ' --- ' + this.getContentNode().val());
+     // Note: The cancel event seems to be buggy and occurs at the wrong times, so I commented it out.
+     //      },
+     //      cancel: function(event) {
+     //        alert('Cancel Event:' + this.isNew() + ' --- ' + this.getContentNode().val());
+     }
+     }
+     });
+     new Y.Scheduler({
+     boundingBox: '#scheduler',
+     items: items,
+     views: schedulerViews,
+     activeView: schedulerViews[2],
+     eventRecorder: eventRecorder,
+     firstDayOfWeek: 1,
+     // activeView: weekView,
+     // views: [dayView, weekView, monthView, agendaView]
+     }).render();
+
+     });
+     */
+</script>
+
+
+
+
+
+
+{% load static %}
+<img src="{% static "images/sid111111111111e3.jpg" %}" class="img-responsive" alt="My image"/>
+
 {% if latest_question_list %}
-    <ul>
+<ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'entry:detail' question.id %}">{{ question.question_text }}</a></li>
+    <li><a href="{% url 'entry:detail' question.id %}">{{ question.question_text }}</a></li>
 
     {% endfor %}
-    </ul>
+</ul>
 {% else %}
-    <p>No polls are available.</p>
+<p>No polls are available.</p>
 {% endif %}
+
+
+{% endblock %}
