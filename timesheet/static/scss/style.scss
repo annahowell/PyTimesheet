@@ -5,7 +5,7 @@ html {
 
 
 body {
-  margin: 70px 0 80px;
+  margin: 90px 0 90px;
 }
 
 
@@ -20,9 +20,9 @@ footer {
 
 #scheduler-id {
   margin: 30px 0;
-}
 
-#scheduler-id .fc-time {
+  .fc-time {
+    text-align: center;
+  }
 
-  text-align: center;
 }

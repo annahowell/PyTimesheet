@@ -26,3 +26,15 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+
+
+# ======================================================
+
+
+class Event(models.Model):
+    event_id = models.AutoField(primary_key = True)
+    start = models.DateTimeField('Event start date & time')
+    end = models.DateTimeField('Event end date & time')
+    employee_id = models.IntegerField(default = 0)
+    project_id = models.IntegerField(default = 0)
