@@ -1,4 +1,4 @@
-<!doctype html>{% load static %}
+<!doctype html>{% load global_tags %}{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,14 +10,15 @@
 
     <title>{% block title %}Timesheet{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% get_theme %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
+
 <header>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+    <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-primary">
         <div class="container">
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +62,5 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 {% block javascript %}{% endblock %}
-
 </body>
 </html>
