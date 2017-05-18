@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<h2>Add / Edit Employee</h2>
+{% block title %}Login{% endblock %}
 
+{% block content %}
+<h2>Login</h2>
 <form method="POST" class="post-form">{% csrf_token %}
     {% for field in form %}
     <div class="form-group row mb-30">
@@ -19,5 +20,7 @@
       </div>
     </div>
 </form>
-{{ form.first_name.errors }}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
 {% endblock %}

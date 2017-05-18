@@ -3,7 +3,6 @@ html {
   min-height: 100%;
 }
 
-
 body {
   margin: 90px 0 90px;
 }
@@ -18,11 +17,22 @@ footer {
   background-color: #f5f5f5;
 }
 
+
+h2 {
+  padding: 3rem 0 1.5rem;
+  text-align: right;
+}
+
 #scheduler-id {
-  margin: 30px 0;
+  padding: 3rem 0 1.5rem;
 
   .fc-time {
     text-align: center;
+  }
+
+  h2 {
+    padding: 0;
+    font-size: 1.5rem;
   }
 
 }

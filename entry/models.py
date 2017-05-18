@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -28,13 +29,27 @@ class Choice(models.Model):
         return self.choice_text
 
 
-
 # ======================================================
 
 
 class Event(models.Model):
-    event_id = models.AutoField(primary_key = True)
-    start = models.DateTimeField('Event start date & time')
+    event_id = models.AutoField(
+        primary_key=True
+    )
+
+    start = models.DateTimeField(
+        'Event start date & time'
+    )
     end = models.DateTimeField('Event end date & time')
-    employee_id = models.IntegerField(default = 0)
-    project_id = models.IntegerField(default = 0)
+
+    user_id = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        db_column='user_id',
+        on_delete=models.CASCADE,
+        default=1,
+    )
+
+    project_id = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'event'

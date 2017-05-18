@@ -17,11 +17,15 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from django.conf.urls import include, url
+from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url(r'^entry/', include('entry.urls')),
+    url(r'^login/$', auth_views.login, name='login', ),
+    url(r'^logout/$', auth_views.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^entry/', include('entry.urls'), name='entry'),
     url(r'^employee/', include('employee.urls')),
-    url(r'^projects/', include('projects.urls')),
-    url(r'^annaadmin/', admin.site.urls),
+    url(r'^project/', include('project.urls')),
 ]

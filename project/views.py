@@ -2,15 +2,6 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import request
 from .forms import PostForm
 
-from .models import Employee
-
-#def results(request, question_id):
-    #question = get_object_or_404(Employee, pk=employee_id)
-    #return render(request, 'polls/results.html', {'question': question})
-
-
-
-
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -24,3 +15,7 @@ def post_new(request):
         current_user = request.user
         some_one = current_user.id
     return render(request, 'employee/post_edit.html', {'form': form, 'some': some_one})
+
+
+def IndexView(request):
+    return HttpResponse("Hello, world. You're at the project index.")
