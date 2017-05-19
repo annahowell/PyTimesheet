@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login', ),
     url(r'^logout/$', auth_views.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.EntryIndexView.as_view()),
+    url(r'^$', views.entry.EntryIndexView.as_view(), name='entry'),
+    url(r'^employee/$', views.employee.IndexView.as_view(), name='employee'),
+    url(r'^project/$', views.project.IndexView.as_view(), name='project'),
 ]

@@ -1,7 +1,7 @@
 from django import forms
 
-'''
-class PostForm(forms.ModelForm):
+
+class AddEdit(forms.ModelForm):
 
     first_name = forms.CharField(
         label="First name",
@@ -48,5 +48,5 @@ class PostForm(forms.ModelForm):
     )
 
     class Meta:
-        model = timesheet.Project
-        fields = ('first_name', 'last_name', 'username', 'password', 'disabled')'''
+        model = ts_app.Project
+        fields = ('first_name', 'last_name', 'username', 'password', 'disabled')
