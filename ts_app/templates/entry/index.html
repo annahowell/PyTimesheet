@@ -46,11 +46,6 @@
     <br><br>
     Changing the project the work box belongs to changes its colour strip so it's easier to read what's what.
 </p>
-
-<img src="{% static "images/sid111111111111e3.jpg" %}" class="img-responsive" alt="My image"/>
-
-
-
 {% endblock %}
 
 {% block javascript %}
@@ -71,7 +66,7 @@ $(document).ready(function() {
         defaultDate: moment(),              // Using the moment js lib, create a new moment which by default is current date
         minTime: '07:00',                   // Time day/week views start
         maxTime: '23:00',                   // Time day/weel views stop
-        columnFormat: 'ddd',
+        columnFormat: 'ddd D',
         weekNumbers: true,                  // Show week numbers in month view
         showNonCurrentDates: true,          // Show greyed out dates from adjacent months in month view.
         hiddenDays: [0],                    // Hide Sunday
