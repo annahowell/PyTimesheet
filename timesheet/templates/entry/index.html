@@ -49,16 +49,7 @@
 
 <img src="{% static "images/sid111111111111e3.jpg" %}" class="img-responsive" alt="My image"/>
 
-{% if latest_question_list %}
-<ul>
-    {% for question in latest_question_list %}
-    <li><a href="{% url 'entry:detail' question.id %}">{{ question.question_text }}</a></li>
 
-    {% endfor %}
-</ul>
-{% else %}
-<p>No polls are available.</p>
-{% endif %}
 
 {% endblock %}
 
