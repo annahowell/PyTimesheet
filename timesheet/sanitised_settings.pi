@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
-    'ts_app.apps.TimesheetAppConfig',
+    'ts_app.apps.TsAppConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -58,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_DIR, 'templates')
+            'ts_app.templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -69,8 +69,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-                # Add global tags file located in /timesheet/templatetags/timesheet_tags.py
-                'global_tags': PROJECT_NAME + '.templatetags.global_tags',
+                # Add global tags file located in /timesheet/templatetags/ts_tags.py
+                'global_tags': 'ts_app.templatetags.ts_tags',
             },
         },
     },
