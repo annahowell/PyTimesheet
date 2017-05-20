@@ -8,7 +8,7 @@ from django.http import request
 from django.views import generic
 
 
-class EntryIndexView(LoginRequiredMixin, generic.ListView):
+class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = 'entry/index.html'
     context_object_name = 'latest_question_list'
 

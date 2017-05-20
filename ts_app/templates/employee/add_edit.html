@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Employee</h3>
+
+<form method="POST" class="post-form">
+    {% csrf_token %}
+
+    <div class="form-group row mb-5">
+        <label for="id_employee" class="col-sm-2 col-form-label">Employee</label>
+        <div class="col-sm-3">
+            <select name="employee" class="form-control" id="id_employee">
+                <option selected disabled value="new_employee">Add employee</option>
+                <option value="jane_smith">Jane Smith</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_first_name" class="col-sm-2 col-form-label">First name</label>
+        <div class="col-sm-3">
+            <input type="text" name="first_name" class="form-control" maxlength="30" required="" id="id_first_name">
+        </div>
+
+        <label for="id_last_name" class="offset-sm-2 col-sm-2 col-form-label">Last name</label>
+        <div class="col-sm-3">
+            <input type="text" name="last_name" class="form-control" maxlength="30" required="" id="id_last_name">
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_username" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-3">
+            <input type="text" name="username" class="form-control" maxlength="30" required="" id="id_username">
+        </div>
+
+        <label for="id_email" class="offset-sm-2 col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-3">
+            <input type="text" name="email" class="form-control" maxlength="254" required="" id="id_email">
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_password1" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-3">
+            <input type="text" name="password1" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,60}" maxlength="32" required="" id="id_password1">
+        </div>
+
+        <label for="id_password2" class="offset-sm-2 col-sm-2 col-form-label">Confirm Password</label>
+        <div class="col-sm-3">
+            <input type="text" name="password2" class="form-control" maxlength="32" required="" id="id_password2">
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_is_active" class="col-sm-2 col-form-label">Active</label>
+        <div class="col-sm-3">
+            <input type="checkbox" name="is_active" id="id_is_active" checked="">
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <div class="col-sm-12 anna-ta-r">
+            <input type="submit" value="Submit" class="btn btn-success">
+        </div>
+    </div>
+    {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+    {% endfor %}
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{ form.first_name.errors }}
+{% endblock %}

@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
-
 {% block content %}
-<h2>Login</h2>
-<form method="POST" class="post-form">{% csrf_token %}
-    {% for field in form %}
-    <div class="form-group row mb-30">
-        <label for="{{ field.id_for_label }}" class="col-sm-3 col-form-label">{{ field.label }}</label>
-        <div class="col-sm-9">
-            {{ field }}
+<h3 class="pt-5 pb-5 anna-ta-r">Login</h3>
+
+<form method="POST" class="post-form">
+    {% csrf_token %}
+
+    <div class="form-group row mb-4">
+        <label for="id_username" class="offset-sm-3 col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-4">
+            <input type="text" name="username" class="form-control" autofocus maxlength="254" required id="id_username" />
         </div>
     </div>
-    {% endfor %}
+
+    <div class="form-group row mb-4">
+        <label for="id_password" class="offset-sm-3 col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-4">
+            <input type="password" name="password" class="form-control" required id="id_password" />
+        </div>
+    </div>
 
     <div class="form-group row">
-      <div class="offset-sm-3 col-sm-9">
+      <div class="col-sm-9 mt-5 anna-ta-r">
         <input type="submit" value="Submit" class="btn btn-success">
       </div>
     </div>

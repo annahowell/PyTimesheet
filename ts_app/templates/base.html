@@ -17,7 +17,6 @@
 </head>
 
 <body>
-
 <header>
     <nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-primary">
         <div class="container">
@@ -26,22 +25,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="navbar-brand" href="#">Time Sheet</a>
-
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    {% with app_name=request.resolver_match.app_name %}
-                    <a class="nav-item nav-link" id="entry" href="/entry">Entry<span class="sr-only">(current)</span></a>
+            <a class="navbar-brand" href="/">Time Sheet</a>
+            <div class="collapse navbar-collapse ml-4" id="navbarNavAltMarkup">
+                {% if user.is_authenticated %}
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" id="entry" href="/">Entry<span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" id="reports" href="/reports">Reports</a>
                     <a class="nav-item nav-link" id="employee" href="/employee">Employees</a>
                     <a class="nav-item nav-link" id="project" href="/project">Projects</a>
+                </div>
+                <div class="navbar-nav">
+                    {% if request.user.is_superuser %}
                     <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
+                    {% endif %}
                     <a class="nav-item nav-link" id="preferences" href="/preferences">Preferences</a>
                     <a class="nav-item nav-link" href="/logout">Logout</a>
-                    {% endwith %}
-                    {% endif %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </nav>

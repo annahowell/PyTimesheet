@@ -15,4 +15,4 @@ def IndexView(request):
         form = AddEditForm()
         current_user = request.user
         some_one = current_user.id
-    return render(request, 'employee/post_edit.html', {'form': form, 'some': some_one})
+    return render(request, 'report/post_edit.html', {'form': form, 'some': some_one})
