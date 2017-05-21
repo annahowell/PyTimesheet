@@ -66,7 +66,7 @@ class Client(models.Model):
     client_phone_number = models.CharField(default='', max_length=32)
     client_email = models.EmailField(default='', max_length=128)
     client_address1 = models.CharField(default='', max_length=128)
-    clienta_address2 = models.CharField(default='', max_length=128)
+    client_address2 = models.CharField(default='', max_length=128)
     client_postcode = models.CharField(default='', max_length=32)
     client_created_on = models.DateField()
     client_modified_on = models.DateField()

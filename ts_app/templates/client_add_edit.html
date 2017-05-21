@@ -2,7 +2,7 @@
 
 {% block content %}
 <h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Client</h3>
-
+<!--
 <form method="POST" class="post-form greyed">
     {% csrf_token %}
 
@@ -54,6 +54,41 @@
         </div>
     </div>
 
+</form>
+-->
+<form method="POST" class="post-form greyed">
+    {% csrf_token %}
+
+    <div class="form-group row mb-5 mt-3">
+        <label for="id_client" class="col-sm-2 col-form-label">Client</label>
+        <div class="col-sm-4">
+            <select name="client" class="form-control" id="id_client">
+                <option selected disabled>Please choose</option>
+                <option value="new_client">Create new client</option>
+                <option value="kingfisher">Kingfisher IT PLC</option>
+            </select>
+        </div>
+    </div>
+
+    {% for field in form %}
+    {% cycle '<div class="form-group row mb-4">' '' %}
+        <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
+        <div class="col-sm-4">
+            {{ field }}
+        </div>
+    {% cycle '' '</div>' %}
+    {% endfor %}
+
+    <div class="form-group row mb-0">
+        <div class="offset-sm-2 col-sm-7">
+            <span class="form_error" style="color: red">
+                {% for error in field.errors %}{{ error }}{% endfor %}
+            </span>
+        </div>
+        <div class="col-sm-3 anna-ta-r">
+            <input type="submit" value="Confirm" class="btn btn-success">
+        </div>
+    </div>
 </form>
 {% endblock %}
 

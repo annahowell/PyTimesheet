@@ -8,7 +8,15 @@ from ts_app.models import Event, Project, Activity, Client
 class AddEditEmployeeForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'is_active' )
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2',
+            'is_active'
+        )
 
 # ======================================================
 
@@ -16,7 +24,13 @@ class AddEditEmployeeForm(UserCreationForm):
 class AddEditProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('project_name', 'project_description', 'project_color', 'client_id','is_active')
+        fields = (
+            'project_name',
+            'project_description',
+            'project_color',
+            'client_id',
+            'is_active'
+        )
 
 # ======================================================
 
@@ -24,4 +38,13 @@ class AddEditProjectForm(forms.ModelForm):
 class AddEditClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ('client_name', 'is_active' )
+        fields = (
+            'client_name',
+            'client_contact_name',
+            'client_phone_number',
+            'client_email',
+            'client_address1',
+            'client_address2',
+            'client_postcode',
+            'is_active'
+        )
