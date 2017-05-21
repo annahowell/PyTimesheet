@@ -5,5 +5,5 @@ from ts_app.forms import AddEditProjectForm
 
 def IndexView(request):
     form = AddEditProjectForm()
-    return render(request, 'project/add_edit.html', {'form': form})
+    return render(request, 'project_add_edit.html', {'form': form})
 

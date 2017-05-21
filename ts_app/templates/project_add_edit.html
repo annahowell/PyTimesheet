@@ -44,9 +44,9 @@
     </div>
 
     <div class="form-group row mb-4">
-        <label for="id_project_color" class="col-sm-2 col-form-label">Timesheet Color</label>
+        <label for="id_project_color" class="col-sm-2 col-form-label">Project Color Code</label>
         <div class="col-sm-4">
-            <input type="text" name="project_1color" id="id_projec1t_color" class="colo1rfield_fi1eld js1color form-control" autocomplete="off">
+            <input type="text" name="project_color" {% if form.project_color.value %}value="{{ form.project_color.value }}"{% endif %}" id="id_project_color" class="colorfield_field jscolor form-control" autocomplete="off" style="background-image: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
         </div>
 
         <label for="id_is_active" class="col-sm-2 col-form-label">Active</label>

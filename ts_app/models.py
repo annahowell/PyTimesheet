@@ -3,8 +3,8 @@ from django.db import models
 from colorfield.fields import ColorField
 
 
-# Employees are handled with django's User model as non-superusers; why reinvent the wheel
-
+# Employees are handled with django's User model as non-superusers
+# ColorField uses https://github.com/jaredly/django-colorfield
 
 class Event(models.Model):
     event_id = models.AutoField(primary_key=True)
@@ -44,7 +44,7 @@ class Project(models.Model):
 class Activity(models.Model):
     activity_id = models.AutoField(primary_key=True)
     activity_name = models.CharField(max_length=64)
-    activity_color = models.CharField(max_length=6)
+    activity_color = ColorField(default='#9900FF')
     activity_created = models.DateField()
     activity_modified = models.DateField()
     activity_created_by = models.IntegerField(default=1)

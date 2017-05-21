@@ -20,7 +20,7 @@ def IndexView(request):
             return redirect('home')
     else:
         form = AddEditEmployeeForm()
-    return render(request, 'employee/add_edit.html', {'form': form})
+    return render(request, 'employee_add_edit.html', {'form': form})
 
 
 # ======================================================

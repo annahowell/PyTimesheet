@@ -19,7 +19,7 @@ def IndexView(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = AddEditClientForm()
-    return render(request, 'client/add_edit.html', {'form': form})
+    return render(request, 'client_add_edit.html', {'form': form})
 
 
 # ======================================================
