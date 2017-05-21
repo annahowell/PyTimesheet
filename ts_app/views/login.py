@@ -9,7 +9,7 @@ from django.views import generic
 
 
 class EntryIndexView(LoginRequiredMixin, generic.ListView):
-    template_name = 'entry/index.html'
+    template_name = 'entry/add_edit.html'
     context_object_name = 'latest_question_list'
 
 

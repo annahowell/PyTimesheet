@@ -1,0 +1,71 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
+{% endblock %}
+
+{% block content %}
+<h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Project</h3>
+
+<form method="POST" class="post-form greyed">
+    {% csrf_token %}
+
+    <div class="form-group row mb-5 mt-3">
+        <label for="id_project" class="col-sm-2 col-form-label">Project</label>
+        <div class="col-sm-4">
+            <select name="project" class="form-control" id="id_project">
+                <option selected disabled>Please choose</option>
+                <option value="new_project">Create new project</option>
+                <option value="kingfisher_plc">Kingfisher IT PLC</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_project_name" class="col-sm-2 col-form-label">Project name</label>
+        <div class="col-sm-4">
+            <input type="text" name="project_name" class="form-control" maxlength="30" required="" id="id_project_name">
+        </div>
+
+        <label for="id_client_id" class="col-sm-2 col-form-label">Client</label>
+        <div class="col-sm-4">
+            <select name="project" class="form-control" id="id_client_id">
+                <option selected disabled>Please choose</option>
+                <option value="jane_smith">Jane Smith</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_project_description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea name="project_description" style="min-height:128px" class="form-control" maxlength="512" required="" id="id_project_description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label for="id_project_color" class="col-sm-2 col-form-label">Timesheet Color</label>
+        <div class="col-sm-4">
+            <input type="text" name="project_1color" id="id_projec1t_color" class="colo1rfield_fi1eld js1color form-control" autocomplete="off">
+        </div>
+
+        <label for="id_is_active" class="col-sm-2 col-form-label">Active</label>
+        <div class="col-sm-4">
+            <input type="checkbox" name="is_active" id="id_is_active" checked="">
+        </div>
+    </div>
+
+    <div class="form-group row mb-0">
+        <div class="col-sm-12 anna-ta-r">
+            <input type="submit" value="Confirm" class="btn btn-success">
+        </div>
+    </div>
+    {% for error in field.errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'colorfield/jscolor/jscolor.min.js' %}"></script>
+{% endblock %}

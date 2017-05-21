@@ -1,4 +1,4 @@
-<!doctype html>{% load global_tags %}{% load static %}
+<!doctype html>{% load ts_tags %}{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="{% get_theme %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
+    {% block css %}{% endblock %}
     <style>.nav-link#{{ request.resolver_match.url_name }}{color:#18bc9c}</style>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
@@ -29,17 +30,25 @@
             <div class="collapse navbar-collapse ml-4" id="navbarNavAltMarkup">
                 {% if user.is_authenticated %}
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" id="entry" href="/">Entry<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" id="reports" href="/reports">Reports</a>
-                    <a class="nav-item nav-link" id="employee" href="/employee">Employees</a>
-                    <a class="nav-item nav-link" id="project" href="/project">Projects</a>
+                    <a class="nav-item nav-link" id="entry" href="/">entry<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" id="reports" href="/reports">reports</a>
+                    <a class="nav-item nav-link" id="employee" href="/employee">employees</a>
+                    <a class="nav-item nav-link" id="project" href="/project">projects</a>
+                    <a class="nav-item nav-link" id="client" href="/client">clients</a>
                 </div>
                 <div class="navbar-nav">
                     {% if request.user.is_superuser %}
-                    <a class="nav-item nav-link" id="admin" href="/admin">Admin</a>
+                    <a class="nav-item nav-link" id="admin" href="/admin">admin</a>
                     {% endif %}
-                    <a class="nav-item nav-link" id="preferences" href="/preferences">Preferences</a>
-                    <a class="nav-item nav-link" href="/logout">Logout</a>
+                     <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{request.user.username}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" id="preferences" href="/preferences">preferences</a>
+                            <a class="dropdown-item" href="/logout">logout</a>
+                        </div>
+                    </div>
                 </div>
                 {% endif %}
             </div>

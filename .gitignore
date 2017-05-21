@@ -2,6 +2,7 @@
 .DS_Store
 .idea/
 timesheet/settings.py
+ts_app/migrations/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
