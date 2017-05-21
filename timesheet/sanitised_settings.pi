@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_DIR = os.path.join(BASE_DIR, PROJECT_NAME)
 
 LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/entry'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login'
 
 
@@ -34,7 +34,9 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
+    'colorfield',
     'ts_app.apps.TsAppConfig',
+    'django.forms',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -57,6 +59,7 @@ ROOT_URLCONF = PROJECT_NAME + '.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': [
             'ts_app.templates',
         ],
@@ -69,12 +72,14 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries': {
-                # Add global tags file located in /timesheet/templatetags/ts_tags.py
-                'global_tags': 'ts_app.templatetags.ts_tags',
+                'ts_tags': 'ts_app.templatetags.ts_tags',
             },
         },
     },
 ]
+
+# Allow overriding form inputs with .html files, similar to overriding templates
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 WSGI_APPLICATION = PROJECT_NAME + '.wsgi.application'
 
