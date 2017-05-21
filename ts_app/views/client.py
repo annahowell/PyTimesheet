@@ -13,10 +13,12 @@ def IndexView(request):
         form = AddEditClientForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
+            post.client_created = timezone.now()
+            post.client_modified = timezone.now()
+            post.client_created_by = request.user.id
+            post.client_modified_by = request.user.id
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('project')
     else:
         form = AddEditClientForm()
     return render(request, 'client_add_edit.html', {'form': form})

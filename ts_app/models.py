@@ -29,10 +29,10 @@ class Project(models.Model):
     project_color = ColorField(default='#9900FF')
     project_created = models.DateField()
     project_modified = models.DateField()
-    project_created_by = models.IntegerField(default=1)
-    project_modified_by = models.IntegerField(default=1)
+    project_created_by = models.IntegerField(default=199)
+    project_modified_by = models.IntegerField(default=199)
     is_active = models.BooleanField(default=False)
-    client_id = models.ForeignKey('Client', db_column='client_id', default=1, on_delete=models.CASCADE)
+    client_id = models.ForeignKey('Client', db_column='client_id', default=9, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'project'
@@ -61,9 +61,15 @@ class Activity(models.Model):
 
 class Client(models.Model):
     client_id = models.AutoField(primary_key=True)
-    client_name = models.CharField(max_length=64)
-    client_created = models.DateField()
-    client_modified = models.DateField()
+    client_name = models.CharField('Client name', max_length=64)
+    client_contact_name  = models.CharField(default='', max_length=64)
+    client_phone_number = models.CharField(default='', max_length=32)
+    client_email = models.EmailField(default='', max_length=128)
+    client_address1 = models.CharField(default='', max_length=128)
+    clienta_address2 = models.CharField(default='', max_length=128)
+    client_postcode = models.CharField(default='', max_length=32)
+    client_created_on = models.DateField()
+    client_modified_on = models.DateField()
     client_created_by = models.IntegerField(default=1)
     client_modified_by = models.IntegerField(default=1)
     is_active = models.BooleanField(default=False)

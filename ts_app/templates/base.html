@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="{% get_theme %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
     {% block css %}{% endblock %}
-    <style>.nav-link#{{ request.resolver_match.url_name }}{color:#18bc9c}</style>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>.nav-link#{{ request.resolver_match.url_name }}{color:#18bc9c}</style>
 </head>
 
 <body>
@@ -36,14 +36,11 @@
                     <a class="nav-item nav-link" id="project" href="/project">projects</a>
                     <a class="nav-item nav-link" id="client" href="/client">clients</a>
                 </div>
+
                 <div class="navbar-nav">
-                    {% if request.user.is_superuser %}
-                    <a class="nav-item nav-link" id="admin" href="/admin">admin</a>
-                    {% endif %}
+                    {% if request.user.is_superuser %}<a class="nav-item nav-link" id="admin" href="/admin">admin</a>{% endif %}
                      <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{request.user.username}}
-                        </a>
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{request.user.username}}</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" id="preferences" href="/preferences">preferences</a>
                             <a class="dropdown-item" href="/logout">logout</a>

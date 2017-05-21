@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^report/$', views.report.IndexView, name='report'),
 
     #url(r'^admin/', admin.site.urls),
-    url(r'^login/$', auth_views.login, name='login', ),
+    url(r'^login/$', auth_views.login, {'template_name': 'employee_login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 ]

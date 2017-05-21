@@ -33,4 +33,6 @@ class IndexView(LoginRequiredMixin, generic.ListView):
         return render(request, 'employee/post_edit.html', {'form': form, 'some': some_one})
 
 '''
+
+
 # ======================================================

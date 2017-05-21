@@ -45,11 +45,11 @@
 
     <div class="form-group row mb-4">
         <label for="id_project_color" class="col-sm-2 col-form-label">Project Color Code</label>
-        <div class="col-sm-4">
-            <input type="text" name="project_color" {% if form.project_color.value %}value="{{ form.project_color.value }}"{% endif %}" id="id_project_color" class="colorfield_field jscolor form-control" autocomplete="off" style="background-image: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
+        <div class="col-sm-2">
+            <input type="text" maxlength="6" name="project_color" {% if form.project_color.value %}value='{{ form.project_color.value }}'{% endif %} id="id_project_color" class="colorfield_field jscolor form-control" autocomplete="off">
         </div>
 
-        <label for="id_is_active" class="col-sm-2 col-form-label">Active</label>
+        <label for="id_is_active" class="offset-sm-2 col-sm-2 col-form-label">Active</label>
         <div class="col-sm-4">
             <input type="checkbox" name="is_active" id="id_is_active" checked="">
         </div>
