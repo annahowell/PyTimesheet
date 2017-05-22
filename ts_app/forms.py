@@ -26,11 +26,19 @@ class AddEditProjectForm(forms.ModelForm):
         model = Project
         fields = (
             'project_name',
+
             'project_description',
             'project_color',
             'client_id',
             'is_active'
         )
+
+    project_name = forms.CharField(
+        label='Name',
+        widget=forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder': 'Enter title here'}
+        )
+    )
 
 # ======================================================
 
@@ -39,7 +47,7 @@ class AddEditClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = (
-            'client_name',
+            'client_business_name',
             'client_contact_name',
             'client_phone_number',
             'client_email',

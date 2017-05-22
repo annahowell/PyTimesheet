@@ -24,9 +24,9 @@ class Event(models.Model):
 
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
-    project_name = models.CharField(max_length=64)
-    project_description = models.CharField(max_length=512)
-    project_color = ColorField(default='#9900FF')
+    project_name = models.CharField('Name', max_length=64)
+    project_description = models.CharField('Description', max_length=512)
+    project_color = ColorField('Color', default='#9900FF')
     project_created = models.DateField()
     project_modified = models.DateField()
     project_created_by = models.IntegerField(default=199)
@@ -61,13 +61,13 @@ class Activity(models.Model):
 
 class Client(models.Model):
     client_id = models.AutoField(primary_key=True)
-    client_name = models.CharField('Client name', max_length=64)
-    client_contact_name  = models.CharField(default='', max_length=64)
-    client_phone_number = models.CharField(default='', max_length=32)
-    client_email = models.EmailField(default='', max_length=128)
-    client_address1 = models.CharField(default='', max_length=128)
-    client_address2 = models.CharField(default='', max_length=128)
-    client_postcode = models.CharField(default='', max_length=32)
+    client_business_name = models.CharField('Business name', default='', max_length=64)
+    client_contact_name  = models.CharField('Contact name', default='', max_length=64)
+    client_phone_number = models.CharField('Telephone no', default='', max_length=32)
+    client_email = models.EmailField('Email address', default='', max_length=128)
+    client_address1 = models.CharField('Address', default='', max_length=128)
+    client_address2 = models.CharField('Address cont', default='', max_length=128)
+    client_postcode = models.CharField('Postcode', default='', max_length=32)
     client_created_on = models.DateField()
     client_modified_on = models.DateField()
     client_created_by = models.IntegerField(default=1)
