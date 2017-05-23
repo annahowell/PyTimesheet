@@ -34,8 +34,9 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
+    'widget_tweaks',
     'colorfield',
-    'ts_app.apps.TsAppConfig',
+    'ts_app.apps.Config',
     'django.forms',
     'django.contrib.auth',
     'django.contrib.contenttypes',
