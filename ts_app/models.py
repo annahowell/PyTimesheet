@@ -31,7 +31,7 @@ class Project(models.Model):
     project_modified = models.DateField()
     project_created_by = models.IntegerField(default=199)
     project_modified_by = models.IntegerField(default=199)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     client_id = models.ForeignKey('Client', db_column='client_id', default=9, on_delete=models.CASCADE)
 
     class Meta:
@@ -49,7 +49,7 @@ class Activity(models.Model):
     activity_modified = models.DateField()
     activity_created_by = models.IntegerField(default=1)
     activity_modified_by = models.IntegerField(default=1)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'activity'
@@ -68,11 +68,11 @@ class Client(models.Model):
     client_address1 = models.CharField('Address', default='', max_length=128)
     client_address2 = models.CharField('Address cont', default='', max_length=128)
     client_postcode = models.CharField('Postcode', default='', max_length=32)
-    client_created_on = models.DateField()
-    client_modified_on = models.DateField()
+    client_created_on = models.DateTimeField()
+    client_modified_on = models.DateTimeField()
     client_created_by = models.IntegerField(default=1)
     client_modified_by = models.IntegerField(default=1)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'client'

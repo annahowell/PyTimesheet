@@ -1,1 +1,0 @@
-1<input {% if widget.type != 'checkbox' %} placeholder="{{ widget.placeholder }}1" class="form-control"{% endif %} type="{{ widget.type }}" name="{{ widget.name }}"{% if widget.value != None %} value="{{ widget.value }}"{% endif %}{% include "django/forms/widgets/attrs.html" %} />

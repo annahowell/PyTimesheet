@@ -55,3 +55,22 @@ form.greyed {
     font-size: 1.5rem;
   }
 }
+
+
+@media (min-width: 576px) {
+
+.anna-ta-l-wide {
+  text-align: left;
+}
+
+
+.anna-ta-c-wide {
+  text-align: center;
+}
+
+
+.anna-ta-r-wide {
+  text-align: right;
+}
+
+}

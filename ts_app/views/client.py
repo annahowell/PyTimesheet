@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from ts_app.forms import AddEditClientForm
+from ts_app.models import Client
 
 
 def IndexView(request):
@@ -13,15 +14,16 @@ def IndexView(request):
         form = AddEditClientForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.client_created = timezone.now()
-            post.client_modified = timezone.now()
+            post.client_created_on = timezone.now()
+            post.client_modified_on = timezone.now()
             post.client_created_by = request.user.id
             post.client_modified_by = request.user.id
             post.save()
-            return redirect('project')
+            return redirect('client')
     else:
         form = AddEditClientForm()
-    return render(request, 'client_add_edit.html', {'form': form})
+        existing_clients = Client.objects.filter(is_active=1)
+        return render(request, 'client_add_edit.html', {'form': form, 'existing_clients': existing_clients})
 
 
 # ======================================================
