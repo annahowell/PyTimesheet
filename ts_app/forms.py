@@ -23,22 +23,20 @@ class AddEditEmployeeForm(UserCreationForm):
 
 class AddEditProjectForm(forms.ModelForm):
     class Meta:
+
         model = Project
         fields = (
             'project_name',
-
             'project_description',
             'project_color',
             'client_id',
             'is_active'
         )
 
-    project_name = forms.CharField(
-        label='Name',
-        widget=forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'Enter title here'}
-        )
-    )
+        widgets = {
+            'project_description': forms.Textarea(attrs={'cols': 80, 'rows': 10}),
+        }
+
 
 # ======================================================
 

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load ts_tags %}
 
 {% block content %}
 
@@ -6,24 +6,24 @@
 
 <form method="POST" class="post-form greyed mt-5">
     {% csrf_token %}
-<h3 class="pt-0 pb-5 anna-ta-c">Login</h3>
+<h3 class="pt-0 pb-5 pl-4 anna-ta-c">Login</h3>
 
     <div class="form-group row mb-4 mt-3">
-        <label for="id_username" class="col-sm-4 col-form-label">Username</label>
+        {{ form.username|add_label_class:'anna-ta-r-wide col-sm-4 col-form-label pr-0' }}
         <div class="col-sm-8">
-            <input type="text" name="username" class="form-control" autofocus maxlength="149" required id="id_username" />
+            {{ form.username|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-4">
-        <label for="id_password" class="col-sm-4 col-form-label">Password</label>
+        {{ form.password|add_label_class:'anna-ta-r-wide col-sm-4 col-form-label pr-0' }}
         <div class="col-sm-8">
-            <input type="password" name="password" class="form-control" maxlength="127" required id="id_password" />
+            {{ form.password|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-      <div class="col-sm-12 mt-5 anna-ta-r">
+      <div class="col-sm-12 mt-4 anna-ta-r">
         <input type="submit" value="Submit" class="btn btn-success">
       </div>
     </div>

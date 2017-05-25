@@ -18,9 +18,12 @@ def IndexView(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('home')
+
+    # elif request.is_ajax():
     else:
         form = AddEditEmployeeForm()
-    return render(request, 'employee_add_edit.html', {'form': form})
+        existing_employees = User.objects.filter(is_active=1)
+    return render(request, 'employee_add_edit.html', {'form': form, 'existing_employees': existing_employees})
 
 
 # ======================================================

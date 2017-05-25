@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load static %}
+{% extends 'base.html' %}{% load static %}{% load ts_tags %}
 
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
@@ -10,30 +10,60 @@
 <form method="POST" class="post-form greyed">
     {% csrf_token %}
 
-    <div class="form-group row mb-5 mt-3">
-        <label for="id_project" class="col-sm-2 col-form-label">Project</label>
-        <div class="col-sm-4">
-            <select name="project" class="form-control" id="id_project">
+    <div class="form-group row mt-4">
+        <label for="id_purpose" class="anna-ta-r-wide col-sm-2 col-form-label pr-0">Project</label>
+        <div class="col-sm-4 mb-5">
+            <select name="client" class="form-control" id="id_purpose">
                 <option selected disabled>Please choose</option>
-                <option value="new_project">Create new project</option>
-                <option value="kingfisher_plc">Kingfisher IT PLC</option>
+                <option value="new_client">Create new project</option>
+
+                {% for project in existing_projects %}
+                <option value="{{ project.project_id }}">{{ project.project_name|title }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>
 
-    {% for field in form %}
-        {% cycle '<div class="form-group row mb-4">' '' %}
-            <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label pr-0">{{ field.label }}</label>
-            <div class="col-sm-4">
-                {{ field }}
-            </div>
-        {# Cycle as normal unless it's the last iternation of the loop, in which case we always need to close the div #}
-        {% if forloop.last %}</div>{% else %}{% cycle '' '</div>' %}{% endif %}
-    {% endfor %}
+    <div class="form-group row mb-0">
+        {{ form.project_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        <div class="col-sm-4 mb-4">
+            {{ form.project_name|add_input_class:'form-control' }}
+        </div>
+
+        <label for="id_client_id" class="anna-ta-r-wide col-sm-2 col-form-label">Client</label>
+        <div class="col-sm-4">
+            <select name="client" class="form-control" id="id_client_id">
+                <option selected disabled>Please choose</option>
+
+                {% for client in existing_clients %}
+                <option value="{{ client.client_id }}">{{ client.client_business_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row mb-0">
+        {{ form.project_description|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        <div class="col-sm-10 mb-4">
+            {{ form.project_description|add_input_class:'form-control' }}
+        </div>
+    </div>
+
+    <div class="form-group row mb-0">
+        <label class="anna-ta-r-wide col-sm-2 col-form-label pr-0" for="id_project_color">Project color</label>
+        <div class="col-sm-4 mb-3">
+            {{ form.project_color }}
+        </div>
+
+        {{ form.is_active|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        <div class="col-sm-1 mb-3">
+            {{ form.is_active }}
+        </div>
+    </div>
 
     <div class="form-group row mb-0">
         <div class="offset-sm-2 col-sm-7">
-            <span class="form_error" style="color: red">
+            <span class="form_error text-danger">
                 {% for error in field.errors %}{{ error }}{% endfor %}
             </span>
         </div>

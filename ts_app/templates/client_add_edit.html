@@ -1,4 +1,4 @@
-{% extends 'base.html' %}{% load widget_tweaks %}
+{% extends 'base.html' %}{% load ts_tags %}
 
 {% block content %}
 <h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Client</h3>
@@ -7,63 +7,63 @@
     {% csrf_token %}
 
     <div class="form-group row mt-4">
-        <label for="{{ form.client_business_name.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">Client</label>
+        <label for="id_purpose" class="anna-ta-r-wide col-sm-2 col-form-label pr-0">Client</label>
         <div class="col-sm-4 mb-5">
-            <select name="client" class="form-control" id="id_client">
+            <select name="client" class="form-control" id="id_purpose">
                 <option selected disabled>Please choose</option>
                 <option value="new_client">Create new client</option>
                 {% for client in existing_clients %}
-                <option value="{{ client.client_id }}">{{ client.client_business_name }}</option>
+                <option value="{{ client.client_id }}">{{ client.client_business_name|title }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        <label for="{{ form.client_business_name.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_business_name.label }}</label>
+        {{ form.client_business_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {% render_field form.client_business_name class="form-control" %}
+            {{ form.client_business_name|add_input_class:'form-control' }}
         </div>
 
-        <label for="{{ form.client_contact_name.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_contact_name.label }}</label>
+        {{ form.client_contact_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {% render_field form.client_contact_name class="form-control" %}
-        </div>
-    </div>
-
-    <div class="form-group row mb-0">
-        <label for="{{ form.client_phone_number.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_phone_number.label }}</label>
-        <div class="col-sm-4 mb-4">
-            {% render_field form.client_phone_number class="form-control" %}
-        </div>
-
-       <label for="{{ form.client_email.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_email.label }}</label>
-        <div class="col-sm-4 mb-4">
-            {% render_field form.client_email class="form-control" %}
+            {{ form.client_contact_name|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        <label for="{{ form.client_address1.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_address1.label }}</label>
+        {{ form.client_phone_number|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {% render_field form.client_address1 class="form-control" %}
+            {{ form.client_phone_number|add_input_class:'form-control' }}
         </div>
 
-        <label for="{{ form.client_postcode.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_postcode.label }}</label>
+        {{ form.client_email|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {% render_field form.client_postcode class="form-control" %}
+            {{ form.client_email|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        <label for="{{ form.client_address2.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.client_address2.label }}</label>
+        {{ form.client_address1|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        <div class="col-sm-4 mb-4">
+            {{ form.client_address1|add_input_class:'form-control' }}
+        </div>
+
+        {{ form.client_postcode|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        <div class="col-sm-4 mb-4">
+            {{ form.client_postcode|add_input_class:'form-control' }}
+        </div>
+    </div>
+
+    <div class="form-group row mb-0">
+        {{ form.client_address2|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-3">
-            {% render_field form.client_address2 class="form-control" %}
+            {{ form.client_address2|add_input_class:'form-control' }}
         </div>
 
-        <label for="{{ form.is_active.id_for_label }}" class="anna-ta-r-wide col-sm-2 col-form-label">{{ form.is_active.label }}</label>
+        {{ form.is_active|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-1 mb-3">
-            {% render_field form.is_active %}
+            {{ form.is_active }}
         </div>
     </div>
 

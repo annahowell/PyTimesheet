@@ -20,7 +20,7 @@ footer {
 
 
 form.greyed {
-  padding: 2rem;
+  padding: 1rem 1rem 1rem 0;
   margin:0;
   //border: solid .2rem #eee;
   background: #f7f7f7;
@@ -57,20 +57,26 @@ form.greyed {
 }
 
 
+@media (min-width: 768px) {
+
+  form.greyed {
+    padding: 2rem 2rem 2rem 0;
+  }
+}
+
 @media (min-width: 576px) {
 
-.anna-ta-l-wide {
-  text-align: left;
-}
+  .anna-ta-l-wide {
+    text-align: left;
+  }
 
 
-.anna-ta-c-wide {
-  text-align: center;
-}
+  .anna-ta-c-wide {
+    text-align: center;
+  }
 
 
-.anna-ta-r-wide {
-  text-align: right;
-}
-
+  .anna-ta-r-wide {
+    text-align: right;
+  }
 }
