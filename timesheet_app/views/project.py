@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import request
-from ts_app.forms import AddEditProjectForm
-from ts_app.models import Client, Project
+from timesheet_app.forms import AddEditProjectForm
+from timesheet_app.models import Client, Project
 
 
 

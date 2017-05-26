@@ -1,12 +1,8 @@
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-
-from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
-from ts_app.forms import AddEditClientForm
-from ts_app.models import Client
+from timesheet_app.forms import AddEditClientForm
+from timesheet_app.models import Client
 
 
 def IndexView(request):
@@ -14,6 +10,16 @@ def IndexView(request):
         form = AddEditClientForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            post.client_business_name = form.cleaned_data.get('client_business_name')
+            post.client_contact_name = form.cleaned_data.get('client_contact_name')
+            post.client_phone_number = form.cleaned_data.get('client_phone_number')
+            post.client_email = form.cleaned_data.get('client_email')
+            post.client_address1 = form.cleaned_data.get('client_address1')
+            post.client_address2 = form.cleaned_data.get('client_address2')
+            post.client_postcode = form.cleaned_data.get('client_postcode')
+            post.client_is_active = form.cleaned_data.get('client_is_active')
+
+
             post.client_created_on = timezone.now()
             post.client_modified_on = timezone.now()
             post.client_created_by = request.user.id

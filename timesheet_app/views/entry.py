@@ -1,5 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -8,7 +6,7 @@ from django.http import request
 from django.views import generic
 
 
-class IndexView(LoginRequiredMixin, generic.ListView):
+class IndexView(generic.ListView):
     template_name = 'entry_index.html'
     context_object_name = 'latest_question_list'
 

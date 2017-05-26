@@ -1,66 +1,61 @@
-{% extends 'base.html' %}{% load ts_tags %}
+{% extends 'base.html' %}{% load timesheet_tags %}
 
 {% block content %}
-<h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Client</h3>
+<h3 class="pt-5 pb-5 anna-ta-r">Add / Edit Emoloyee</h3>
 
 <form method="POST" class="post-form greyed">
     {% csrf_token %}
 
     <div class="form-group row mt-4">
-        <label for="id_purpose" class="anna-ta-r-wide col-sm-2 col-form-label pr-0">Client</label>
+        <label for="id_purpose" class="anna-ta-r-wide col-sm-2 col-form-label pr-0">Employee</label>
         <div class="col-sm-4 mb-5">
             <select name="client" class="form-control" id="id_purpose">
                 <option selected disabled>Please choose</option>
-                <option value="new_client">Create new client</option>
-                {% for client in existing_clients %}
-                <option value="{{ client.client_id }}">{{ client.client_business_name|title }}</option>
+                <option value="new_client">Create new employee</option>
+                {% for employee in existing_employees %}
+                <option value="{{ employee.id }}">{{ employee.first_name|title }} {{ employee.last_name|title }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        {{ form.client_business_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.first_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_business_name|add_input_class:'form-control' }}
+            {{ form.first_name|add_input_class:'form-control' }}
         </div>
 
-        {{ form.client_contact_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.last_name|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_contact_name|add_input_class:'form-control' }}
+            {{ form.last_name|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        {{ form.client_phone_number|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.username|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_phone_number|add_input_class:'form-control' }}
+            {{ form.username|add_input_class:'form-control' }}
         </div>
 
-        {{ form.client_email|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.email|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_email|add_input_class:'form-control' }}
+            {{ form.email|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        {{ form.client_address1|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.password1|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_address1|add_input_class:'form-control' }}
+            {{ form.password1|add_input_class:'form-control' }}
         </div>
 
-        {{ form.client_postcode|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
+        {{ form.password2|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-4 mb-4">
-            {{ form.client_postcode|add_input_class:'form-control' }}
+            {{ form.password2|add_input_class:'form-control' }}
         </div>
     </div>
 
     <div class="form-group row mb-0">
-        {{ form.client_address2|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
-        <div class="col-sm-4 mb-3">
-            {{ form.client_address2|add_input_class:'form-control' }}
-        </div>
-
         {{ form.is_active|add_label_class:'anna-ta-r-wide col-sm-2 col-form-label pr-0' }}
         <div class="col-sm-1 mb-3">
             {{ form.is_active }}

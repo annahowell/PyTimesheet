@@ -1,4 +1,4 @@
-<!doctype html>{% load ts_tags %}{% load static %}
+<!doctype html>{% load timesheet_tags %}{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,8 +25,11 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            {% if user.is_authenticated %}
             <a class="navbar-brand" href="/">Time Sheet</a>
+            {% else %}
+            <span class="navbar-brand">Time Sheet</span>
+            {% endif %}
             <div class="collapse navbar-collapse ml-4" id="navbarNavAltMarkup">
                 {% if user.is_authenticated %}
                 <div class="navbar-nav mr-auto">
@@ -38,7 +41,9 @@
                 </div>
 
                 <div class="navbar-nav">
-                    {% if request.user.is_superuser %}<a class="nav-item nav-link" id="admin" href="/admin">admin</a>{% endif %}
+                    {% if request.user.is_superuser %}
+                    <a class="nav-item nav-link" id="admin" href="/admin">admin</a>
+                    {% endif %}
                      <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{request.user.username}}</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from ts_app.models import Event, Project, Activity, Client
+from timesheet_app.models import Event, Project, Activity, Client
 
 
 
@@ -34,7 +34,7 @@ class AddEditProjectForm(forms.ModelForm):
         )
 
         widgets = {
-            'project_description': forms.Textarea(attrs={'cols': 80, 'rows': 10}),
+            'project_description': forms.Textarea(attrs={'rows': 8}),
         }
 
 
